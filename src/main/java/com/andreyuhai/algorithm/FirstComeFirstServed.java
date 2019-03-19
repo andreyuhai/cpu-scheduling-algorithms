@@ -26,7 +26,7 @@ public class FirstComeFirstServed extends SchedulingAlgorithm {
 
         while (numOfProcessesTerminated != numOfProcessesToSimulate) {
 
-            waitUntillProcessArrives();
+            waitUntilProcessArrives();
 
             setCurrentProcess(true);
 
