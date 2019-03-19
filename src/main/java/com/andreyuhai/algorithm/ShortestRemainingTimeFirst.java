@@ -1,7 +1,6 @@
 package com.andreyuhai.algorithm;
 
 import com.andreyuhai.helper.By;
-import com.andreyuhai.process.Process;
 
 public class ShortestRemainingTimeFirst extends SchedulingAlgorithm{
 
@@ -23,7 +22,7 @@ public class ShortestRemainingTimeFirst extends SchedulingAlgorithm{
 
         while(numOfProcessesTerminated != numOfProcessesToSimulate) {
 //            synchronized (processQueue) {
-//                waitUntillProcessArrives();
+//                waitUntilProcessArrives();
 //                processQueueSize = processQueue.size();
 //                // To see what is exactly in the ready queue uncomment these lines below
 //                System.out.print("[Processor]\tCurrent processes in the queue: ");
@@ -34,7 +33,7 @@ public class ShortestRemainingTimeFirst extends SchedulingAlgorithm{
 //                currentProcess = processQueue.peek();
 //            }
 
-            waitUntillProcessArrives();
+            waitUntilProcessArrives();
 
             setCurrentProcess(false);
 
@@ -52,12 +51,12 @@ public class ShortestRemainingTimeFirst extends SchedulingAlgorithm{
                 if(currentProcess.getRemaining_cpu_time() != 0) {
                     synchronized (processQueue){
                         if(processQueue.size() > processQueueSize) {
-                            time.incrementAndGet();
                             printTime();
                             System.out.println("[Processor]\tNew processes found in the queue!!!");
                             System.out.println("\t\t\t[Processor]\tThere were : " + processQueueSize + " processes in the queue, but now there are : " + processQueue.size());
                             processQueue.remove(currentProcess);
                             processQueue.add(currentProcess);
+                            time.incrementAndGet();
                             printProcessQueue();
                             break;
                         }
