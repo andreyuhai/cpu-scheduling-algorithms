@@ -50,7 +50,20 @@ public abstract class SchedulingAlgorithm {
         }
         synchronized (processQueue) {
             processQueue.add(process);
-            processQueue.notifyAll();
+            //processQueue.notifyAll();
+        }
+    }
+
+    public void enqueuePresetProcess(Process process) {
+        while(process.getArrival_time() != time.intValue()) {
+            if(process.getArrival_time() == time.intValue()){
+                synchronized (processQueue){
+                    processQueue.add(process);
+                }
+            }
+        }
+        synchronized (processQueue) {
+            processQueue.add(process);
         }
     }
 
@@ -63,11 +76,11 @@ public abstract class SchedulingAlgorithm {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            time.incrementAndGet();
             if (processQueue.size() > 0) {
                 System.out.println("\t\t\t[Processor]\tProcess found in the ready queue.\n");
                 processQueueSize = processQueue.size();
             }
-            time.incrementAndGet();
         }
         synchronized (processQueue) {
             processQueueSize = processQueue.size();
