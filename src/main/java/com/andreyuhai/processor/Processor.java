@@ -1,9 +1,6 @@
 package com.andreyuhai.processor;
 
-import com.andreyuhai.algorithm.FirstComeFirstServed;
-import com.andreyuhai.algorithm.SchedulingAlgorithm;
-import com.andreyuhai.algorithm.ShortestJobFirst;
-import com.andreyuhai.algorithm.ShortestRemainingTimeFirst;
+import com.andreyuhai.algorithm.*;
 import com.andreyuhai.process.Process;
 
 public class Processor implements Runnable {
@@ -15,6 +12,7 @@ public class Processor implements Runnable {
         this.numOfProcessesToBeSimulated = numOfProcessesToBeSimulated;
         switch (schedulingAlgorithm) {
             case 0:
+            default:
                 this.schedulingAlgorithm = new FirstComeFirstServed(numOfProcessesToBeSimulated);
                 break;
             case 1:
@@ -23,6 +21,13 @@ public class Processor implements Runnable {
             case 2:
                 this.schedulingAlgorithm = new ShortestRemainingTimeFirst(numOfProcessesToBeSimulated);
                 break;
+        }
+    }
+
+    public Processor(int schedulingAlgorithm, int numOfProcessesToBeSimulated, int quantumTime) {
+        this.numOfProcessesToBeSimulated = numOfProcessesToBeSimulated;
+        if (schedulingAlgorithm == 3) {
+            this.schedulingAlgorithm = new RoundRobin(numOfProcessesToBeSimulated, quantumTime);
         }
     }
 
