@@ -54,7 +54,7 @@ public abstract class SchedulingAlgorithm {
         }
     }
 
-    void waitUntillProcessArrives() {
+    void waitUntilProcessArrives() {
         while (processQueue.size() == 0) {
             printTime();
             System.out.println("[Processor]\tWaiting for processes to enter the ready queue.\n");
@@ -64,7 +64,7 @@ public abstract class SchedulingAlgorithm {
                 e.printStackTrace();
             }
             if (processQueue.size() > 0) {
-                System.out.println("\t\t\t[Processor]\tProcess found in the ready queue. Time: " + time.intValue() + "\n");
+                System.out.println("\t\t\t[Processor]\tProcess found in the ready queue.\n");
                 processQueueSize = processQueue.size();
             }
             time.incrementAndGet();
@@ -84,12 +84,12 @@ public abstract class SchedulingAlgorithm {
 
     void printProcessQueue() {
 
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         System.out.println("@ Currently there are " + processQueue.size() + " processes in the queue.");
         for (Process process : processQueue) {
             System.out.print("@ [ID: " + process.getPid() + "/" + process.getRemaining_cpu_time() + "] ");
         }
-        System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
 
     }
 
