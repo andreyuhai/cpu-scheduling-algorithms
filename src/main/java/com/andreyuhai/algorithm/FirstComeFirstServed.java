@@ -38,10 +38,12 @@ public class FirstComeFirstServed extends SchedulingAlgorithm {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if(i == currentProcess.getBurst_time() -1)
+                    totalWaitTime +=executeProcess(currentProcess);
                 time.incrementAndGet();
             }
 
-            totalWaitTime += executeProcess(currentProcess);
+//            totalWaitTime += executeProcess(currentProcess);
             numOfProcessesTerminated++;
         }
         return totalWaitTime;
