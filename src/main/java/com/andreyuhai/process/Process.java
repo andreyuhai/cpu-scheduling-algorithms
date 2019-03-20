@@ -15,6 +15,7 @@ public class Process implements Runnable{
     private int turnaround_time; // Completion time - arrival time
     private int wait_time; // The elapsed time between turnaround time and burst time
     private int remaining_cpu_time; // To use in Round Robin
+    private boolean preset;
 
     public Process(Processor processor, int pid, int burst_time){
         this.processor = processor;
@@ -30,14 +31,24 @@ public class Process implements Runnable{
         this.remaining_cpu_time = burst_time;
     }
 
+    public Process(Processor processor, int pid, int burst_time, int arrival_time, boolean preset) {
+        this(processor, pid, burst_time);
+        this.arrival_time = arrival_time;
+        this.preset = preset;
+    }
+
     @Override
     public void run() {
-        try {
-            Thread.sleep(new Random().nextInt(1000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(preset){
+            enqueuePreset();
+        } else {
+            try {
+                Thread.sleep(new Random().nextInt(1000));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            enqueue();
         }
-        enqueue();
     }
 
     //---------- GETTER AND SETTERS ----------//
@@ -101,6 +112,10 @@ public class Process implements Runnable{
 
     private void enqueue() {
         processor.enqueue(this);
+    }
+
+    private void enqueuePreset() {
+        processor.enqueueManual(this);
     }
 
 }
