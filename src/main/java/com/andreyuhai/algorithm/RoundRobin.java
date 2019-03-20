@@ -95,15 +95,16 @@ public class RoundRobin extends SchedulingAlgorithm {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            time.incrementAndGet();
             currentProcess.setRemaining_cpu_time(currentProcess.getRemaining_cpu_time() - 1);
             printTime();
             System.out.println("[Process]\tID: " + currentProcess.getPid() + " ran for 1 ms");
             if (currentProcess.getRemaining_cpu_time() == 0) {
                 executeProcess(currentProcess);
+                time.incrementAndGet();
                 roundRobinQueue.remove(currentProcess);
                 return true;
             }
+            time.incrementAndGet();
         }
         return false;
     }
