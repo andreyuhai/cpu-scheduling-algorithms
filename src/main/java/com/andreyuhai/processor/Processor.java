@@ -58,4 +58,8 @@ public class Processor implements Runnable {
         schedulingAlgorithm.enqueueProcess(process);
     }
 
+    public synchronized void enqueueManual(Process process) {
+        schedulingAlgorithm.enqueuePresetProcess(process);
+    }
+
 }
