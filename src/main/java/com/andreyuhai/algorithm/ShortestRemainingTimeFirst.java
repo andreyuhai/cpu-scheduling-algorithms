@@ -71,10 +71,7 @@ public class ShortestRemainingTimeFirst extends SchedulingAlgorithm{
                 }
                 time.incrementAndGet();
             }
-
         }
         return totalWaitTime;
     }
-
-
 }
