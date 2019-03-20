@@ -59,9 +59,10 @@ public class App {
 
 
 //        Processor processor = new Processor(SJF, 100);
-        Processor processor = new Processor(SRTF, 200);
+//        Processor processor = new Processor(RR, 10);
+        Processor processor = new Processor(RR, 100, 4);
         Thread processorTH = new Thread(processor);
-        Thread processScheduler = new Thread(new ProcessGenerator(processor, 200));
+        Thread processScheduler = new Thread(new ProcessGenerator(processor, 100));
 
         processorTH.start();
         processScheduler.start();
